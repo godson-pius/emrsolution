@@ -1,1 +1,19 @@
-export const BASE_URL = process.env.APP_MODE === 'production' ? 'http://localhost:3000' : '';
+'use server'
+
+import {cookies} from "next/headers";
+
+export const setCookie = async (name: string, value: string) => {
+    const cookieStore = await cookies();
+    cookieStore.set(name, value, {secure: true})
+    return true;
+}
+
+export const getCookie = async (name: string) => {
+    const cookieStore = await cookies();
+    return cookieStore.get(name)?.value
+}
+
+export const deleteCookie = async (name: string) => {
+    const cookieStore = await cookies();
+    return cookieStore.delete(name)
+}

@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import connect from "@/lib/db";
 import Claim from "@/lib/models/claim";
 import {Types} from "mongoose";
+import Entity from "@/lib/models/entity";
 
 export const POST = async (req: Request) => {
     try {
@@ -13,14 +14,20 @@ export const POST = async (req: Request) => {
             return new NextResponse(JSON.stringify({message: "Unauthorized action!"}), {status: 401});
         }
 
-        const verifyToken = jwt.verify(token, process.env.SECRET as string) as {id: string, iat: number, exp: number};
+        const verifyToken = jwt.verify(token, process.env.JWT_SECRET as string) as {id: string, iat: number, exp: number};
         if (!verifyToken) {
             return new NextResponse(JSON.stringify({message: "Unauthorized action!"}), {status: 401});
         }
 
-        body['entity'] = new Types.ObjectId(verifyToken.id);
-
         await connect()
+        const entityId = verifyToken.id;
+        const findEntity = await Entity.findOne({_id: entityId});
+
+        if (!findEntity) {
+            return new NextResponse(JSON.stringify({message: 'Unauthorized action!'}), {status: 401})
+        }
+
+        body['entity'] = new Types.ObjectId(entityId);
         const claim = await Claim.create(body);
 
         return new NextResponse(JSON.stringify(claim), {status: 201});

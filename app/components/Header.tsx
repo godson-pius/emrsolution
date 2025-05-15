@@ -4,9 +4,12 @@ import React from 'react'
 import Link from "next/link";
 import {IoChatbubblesOutline, IoColorWandOutline, IoNotificationsOutline} from "react-icons/io5";
 import {usePathname} from 'next/navigation'
+import {decryptLS} from "@/util/nonServer";
+import {IEntity} from "@/interface";
 
 const Header = () => {
     const path = usePathname();
+    const loggedEntity = decryptLS('memo') as unknown as IEntity;
 
     return (
         <header className={'w-full flex flex-col pt-5 px-10 lg:px-20'}>
@@ -31,9 +34,9 @@ const Header = () => {
 
                     <div className={'flex items-center space-x-1'}>
                         <div className={'bg-blue-500 text-white p-1 rounded-lg'}>
-                            <p>JM</p>
+                            <p>{loggedEntity.entityName?.split(' ')[0].charAt(0)}{loggedEntity.entityName?.split(' ')[1].charAt(0)}</p>
                         </div>
-                        <p className={'hidden lg:block'}>Joshua Mark</p>
+                        <p className={'hidden lg:block'}>{loggedEntity.entityName}</p>
                     </div>
                 </section>
             </div>
