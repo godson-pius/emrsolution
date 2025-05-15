@@ -1,0 +1,1 @@
+export const BASE_URL = process.env.APP_MODE === 'production' ? 'http://localhost:3000' : '';
