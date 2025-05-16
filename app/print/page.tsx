@@ -9,13 +9,15 @@ import moment from "moment/moment";
 
 const Print = () => {
     const claim: IClaim = decryptLS('claim') as unknown as IClaim
-    const printDoc: RefObject<any> = useRef(null)
+    const printDoc: RefObject<HTMLDivElement | null> = useRef<HTMLDivElement | null>(null)
     const [printDetails, setPrintDetails] = useState<boolean>(false);
 
     const handlePrint = () => {
         setPrintDetails(true);
 
         setTimeout(() => {
+            if (!printDoc.current) return;
+
             const printContent = printDoc.current.innerHTML;
             const originalContent = document.body.innerHTML;
 
