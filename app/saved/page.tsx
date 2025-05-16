@@ -4,11 +4,13 @@ import Footer from "@/app/components/Footer";
 import Greeting from "@/app/components/Greeting";
 import axios from "axios";
 import {BASE_URL} from "@/util/nonServer";
-import {ITariff} from "@/interface";
+import {IClaim, ITariff} from "@/interface";
 import TariffComponent from "@/app/components/TariffComponent";
+import {getCookie} from "@/util";
+import ClaimedComponent from "@/app/components/ClaimedComponent";
 
 const Tariff = async () => {
-    const tariffs: {data: ITariff[]} = await axios.get(`${BASE_URL}/api/tariff`);
+    const claims: {data: IClaim[]} = await axios.get(`${BASE_URL}/api/claim`, {headers: {'Authorization': `Bearer ${await getCookie('entityToken')}`}});
 
     return (
         <main className={''}>
@@ -24,8 +26,8 @@ const Tariff = async () => {
 
                     <div className={'w-full grid lg:grid-cols-2 gap-2'}>
 
-                        {tariffs.data.length > 0 ? tariffs.data.map((tariff) => (
-                            <TariffComponent key={tariff._id} tariff={tariff} />
+                        {claims.data.length > 0 ? claims.data.slice(0, 4).map((claim) => (
+                            <ClaimedComponent key={claim._id} claim={claim} />
                         )) : (
                             <p className={'my-3 text-gray-600 text-sm'}>No Tariff yet!</p>
                         )}

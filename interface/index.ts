@@ -20,3 +20,11 @@ export interface IClaim {
     entity: string;
     createdAt: Date;
 }
+
+export interface ITariff {
+    _id: string;
+    name: string;
+    description: string;
+    price: number;
+    createdAt: Date;
+}

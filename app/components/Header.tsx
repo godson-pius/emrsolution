@@ -1,15 +1,24 @@
 'use client'
 
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import Link from "next/link";
 import {IoChatbubblesOutline, IoColorWandOutline, IoNotificationsOutline} from "react-icons/io5";
 import {usePathname} from 'next/navigation'
-import {decryptLS} from "@/util/nonServer";
+import {decryptLS, fetchTotalNumOfClaims} from "@/util/nonServer";
 import {IEntity} from "@/interface";
 
 const Header = () => {
+    const [totalClaims, setTotalClaims] = useState<number | unknown>();
     const path = usePathname();
     const loggedEntity = decryptLS('memo') as unknown as IEntity;
+
+    useEffect(() => {
+        function fetchData() {
+            const count: number | unknown = fetchTotalNumOfClaims();
+            setTotalClaims(count);
+        }
+        fetchData();
+    }, []);
 
     return (
         <header className={'w-full flex flex-col pt-5 px-10 lg:px-20'}>
@@ -47,7 +56,7 @@ const Header = () => {
                 <Link href={'/claims'} className={`pb-[6px] ${path.includes('claims') ? 'text-blue-500 border-b-2' : 'text-gray-500'}`}>Claims Processing</Link>
                 <Link href={'/saved'} className={`flex items-center pb-[6px] ${path.includes('saved') ? 'text-blue-500 border-b-2' : 'text-gray-500'}`}>
                     Saved Claims
-                    <p className={'bg-gray-200 p-2 h-5 flex justify-center items-center ml-2 rounded text-[11px]'}>3</p>
+                    <p className={'bg-gray-200 p-2 h-5 flex justify-center items-center ml-2 rounded text-[11px]'}>{totalClaims as number}</p>
                 </Link>
             </nav>
         </header>

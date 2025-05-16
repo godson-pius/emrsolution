@@ -1,5 +1,6 @@
 import ls from "localstorage-slim";
 import moment from "moment/moment";
+import axios from "axios";
 const currentHour = moment().hour();
 
 export const BASE_URL = process.env.NEXT_PUBLIC_APP_MODE === 'production' ? 'http://localhost:3000' : 'https://emrsolution.vercel.app';
@@ -25,4 +26,20 @@ export const getGreetingBasedOnHour = () => {
     } else {
         return "Good Evening";
     }
+}
+
+export const getCookieInClient = (name: string) => {
+    const cookies = document.cookie.split('; ');
+    for (const cookie of cookies) {
+        const [key, value] = cookie.split('=');
+        if (key === name) {
+            return decodeURIComponent(value);
+        }
+    }
+    return null; // Return null if the cookie isn't found
+}
+
+export const fetchTotalNumOfClaims = async() => {
+    const claims = await axios.get(`${BASE_URL}/api/claim`, {headers: {'Authorization': `Bearer ${getCookieInClient('entityToken')}`}});
+    return claims.data.length;
 }
