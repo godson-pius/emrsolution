@@ -56,7 +56,7 @@ const Print = () => {
 
                         <div className={'w-full flex text-lg justify-between pb-5'}>
                             <p>Services: </p>
-                            <p className={'font-medium'}>{claim.services.toString()}</p>
+                            <p className={'font-medium'}>{claim.services?.toString()}</p>
                         </div>
 
                         <div className={'w-full flex text-lg justify-between pb-5'}>
