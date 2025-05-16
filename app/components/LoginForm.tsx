@@ -20,7 +20,8 @@ const LoginForm = () => {
 
         try {
             const res = await toast.promise(axios.post(`${BASE_URL}/api/login`, data), {pending: 'Please wait...', success: 'Welcome back!'})
-            if (res.status === 200) {
+
+            if (res.status === 200 && res.data.success) {
                 await setCookie('entityToken', res.data.token)
                 encryptLS('memo', res.data.entity)
                 return router.push('/dashboard')
