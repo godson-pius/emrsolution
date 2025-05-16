@@ -4,8 +4,7 @@ import Footer from "@/app/components/Footer";
 import Greeting from "@/app/components/Greeting";
 import axios from "axios";
 import {BASE_URL} from "@/util/nonServer";
-import {IClaim, ITariff} from "@/interface";
-import TariffComponent from "@/app/components/TariffComponent";
+import {IClaim} from "@/interface";
 import {getCookie} from "@/util";
 import ClaimedComponent from "@/app/components/ClaimedComponent";
 

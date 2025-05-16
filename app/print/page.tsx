@@ -4,7 +4,6 @@ import React, {RefObject, useRef, useState} from 'react'
 import {decryptLS} from "@/util/nonServer";
 import {IClaim} from "@/interface";
 import Header from "@/app/components/Header";
-import Greeting from "@/app/components/Greeting";
 import Footer from "@/app/components/Footer";
 import moment from "moment/moment";
 

@@ -1,9 +1,9 @@
 import {NextResponse} from "next/server";
-import jwt from "jsonwebtoken";
+// import jwt from "jsonwebtoken";
 import connect from "@/lib/db";
 import Tariff from "@/lib/models/tariff";
 
-export const GET = async (req: Request) => {
+export const GET = async () => {
     try {
         await connect();
         const tariffs = await Tariff.find({}).sort({createdAt: -1});
