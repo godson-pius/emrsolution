@@ -26,9 +26,9 @@ const Print = () => {
             document.body.innerHTML = originalContent;
         }, 1000)
 
-        setTimeout(() => {
-            window.location.reload()
-        }, 2000)
+       window.onafterprint = () => {
+           window.location.reload()
+       }
     }
 
     return (
