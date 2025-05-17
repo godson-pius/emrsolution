@@ -6,6 +6,7 @@ const claimSchema = new Schema({
     phone: {type: String, required: [true, 'Phone number is required']},
     services: {type: [], required: [true, 'Services are required']},
     admissionDate: {type: String, required: [true, 'Admission date required']},
+    dischargeDate: {type: String, required: [true, 'Discharge date required']},
     entity: {type: Schema.Types.ObjectId, ref: "Entity", required: true},
 }, { timestamps: true });
 

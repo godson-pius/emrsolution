@@ -17,6 +17,7 @@ const ClaimForm = () => {
                 phone: formData.get('phone') as string,
                 services: formData.get('services') as string,
                 admissionDate: formData.get('admDate') as string,
+                dischargeDate: formData.get('disDate') as string,
                 date: new Date().toLocaleString(),
             }
 
@@ -84,8 +85,16 @@ const ClaimForm = () => {
                     </div>
 
                     <div className="flex flex-col">
+                        <label htmlFor="disDate">Discharge Date</label>
+                        <input type="date" name="disDate"
+                               required={true}
+                               id="disDate" placeholder='Enter Discharge Date'
+                               className='ring-1 ring-gray-200 p-3 rounded-lg font-thin mt-1 text-sm border-none outline-none focus:ring-blue-700 duration-500'/>
+                    </div>
+
+                    <div className="flex flex-col">
                         <label htmlFor="date">Today Date</label>
-                        <input type="text" name="date" disabled={true} value={new Date().toString()}
+                        <input type="text" name="todaysDate" value={new Date().toString()}
                                id="date" placeholder='Enter Admission Date'
                                required={true}
                                className='ring-1 ring-gray-200 text-gray-500 p-3 rounded-lg font-thin mt-1 text-sm border-none outline-none focus:ring-blue-700 duration-500'/>

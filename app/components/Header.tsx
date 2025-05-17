@@ -3,14 +3,15 @@
 import React, {useEffect, useState} from 'react'
 import Link from "next/link";
 import {IoChatbubblesOutline, IoColorWandOutline, IoNotificationsOutline} from "react-icons/io5";
-import {usePathname} from 'next/navigation'
-import {decryptLS, fetchTotalNumOfClaims} from "@/util/nonServer";
+import {usePathname, useRouter} from 'next/navigation'
+import {decryptLS, fetchTotalNumOfClaims, getCookieInClient} from "@/util/nonServer";
 import {IEntity} from "@/interface";
 
 const Header = () => {
     const [totalClaims, setTotalClaims] = useState<number | unknown>();
     const path = usePathname();
     const loggedEntity = decryptLS('memo') as unknown as IEntity;
+    const router = useRouter();
 
     useEffect(() => {
         function fetchData() {
@@ -19,6 +20,12 @@ const Header = () => {
         }
         fetchData();
     }, []);
+
+    useEffect(() => {
+        (() => {
+            if (localStorage.getItem('memo') === null || getCookieInClient('entityToken') === null) return router.push('/');
+        })()
+    }, [router]);
 
     return (
         <header className={'w-full flex flex-col pt-5 px-10 lg:px-20'}>
