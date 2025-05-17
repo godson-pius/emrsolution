@@ -40,10 +40,10 @@ const Dashboard = () => {
 
     return (
         <main>
-            <Header />
-            <hr className="my-3 w-full absolute top-22 text-gray-300" />
+            <Header/>
+            <hr className="my-3 w-full absolute top-22 text-gray-300"/>
             <div className="px-10 lg:px-20">
-                <Greeting />
+                <Greeting/>
 
                 {/* Notification */}
                 <Notification title="Tariff Uploads">
@@ -60,7 +60,7 @@ const Dashboard = () => {
                         <div className="w-full grid lg:grid-cols-2 gap-2">
                             {tariffs.length > 0 ? (
                                 tariffs.slice(0, 4).map((tariff) => (
-                                    <TariffComponent key={tariff._id} tariff={tariff} />
+                                    <TariffComponent key={tariff._id} tariff={tariff}/>
                                 ))
                             ) : (
                                 <p className="my-3 text-gray-600 text-sm">No Tariff yet!</p>
@@ -76,7 +76,7 @@ const Dashboard = () => {
                         <div className="w-full grid gap-2">
                             {claims.length > 0 ? (
                                 claims.slice(0, 4).map((claim) => (
-                                    <ClaimedComponent key={claim._id} claim={claim} />
+                                    <ClaimedComponent key={claim._id} claim={claim}/>
                                 ))
                             ) : (
                                 <p className="my-3 text-gray-600 text-sm">No Claims yet!</p>
@@ -85,7 +85,9 @@ const Dashboard = () => {
                     </section>
                 )}
             </div>
-            <Footer />
+            <div className={'w-full bottom-0'}>
+                <Footer/>
+            </div>
         </main>
     );
 };

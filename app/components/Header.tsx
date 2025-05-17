@@ -26,8 +26,7 @@ const Header = () => {
                 <section className={'flex space-x-2 items-center'}>
                     <Link href={'/'} className={'text-blue-500 font-bold'}>EMR-SOLUTION</Link>
 
-                    <div
-                        className="p-[1px] bg-gradient-to-r from-gray-200 via-purple-500 to-pink-500 rounded shadow-lg">
+                    <div className="p-[1px] bg-gradient-to-r from-gray-200 via-purple-500 to-pink-500 rounded shadow-lg hidden lg:block">
                         <div className="bg-white rounded px-3 py-1 flex space-x-1">
                             <IoColorWandOutline size={15}/>
                             <Link
@@ -52,8 +51,8 @@ const Header = () => {
 
             <nav className={'flex space-x-3 lg:space-x-6 mt-5 text-sm items-center'}>
                 <Link href={'/dashboard'} className={`pb-[6px] ${path.includes('dashboard') ? 'text-blue-500 border-b-2' : 'text-gray-500'}`}>Home</Link>
-                <Link href={'/tariff'} className={`pb-[6px] ${path.includes('tariff') ? 'text-blue-500 border-b-2' : 'text-gray-500'}`}>Tariff Uploads</Link>
-                <Link href={'/claims'} className={`pb-[6px] ${path.includes('claims') ? 'text-blue-500 border-b-2' : 'text-gray-500'}`}>Claims Processing</Link>
+                <Link href={'/tariff'} className={`pb-[6px] flex gap-1 ${path.includes('tariff') ? 'text-blue-500 border-b-2' : 'text-gray-500'}`}>Tariff <span className={'hidden lg:block'}>Uploads</span></Link>
+                <Link href={'/claims'} className={`pb-[6px] flex gap-1 ${path.includes('claims') ? 'text-blue-500 border-b-2' : 'text-gray-500'}`}>Claims <span className={'hidden lg:block'}>Processing</span></Link>
                 <Link href={'/saved'} className={`flex items-center pb-[6px] ${path.includes('saved') ? 'text-blue-500 border-b-2' : 'text-gray-500'}`}>
                     Saved Claims
                     <p className={'bg-gray-200 p-2 h-5 flex justify-center items-center ml-2 rounded text-[11px]'}>{totalClaims as number}</p>
